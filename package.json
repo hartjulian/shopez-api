@@ -1,0 +1,18 @@
+{
+  "name": "shopez-api",
+  "version": "1.0.0",
+  "description": "A light-weight e-commerce platform RESTful API",
+  "keywords": [
+    "shopez"
+  ],
+  "license": "ISC",
+  "author": "julian.w.hart@gmail.com",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
