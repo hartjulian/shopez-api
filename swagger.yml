@@ -1,0 +1,104 @@
+openapi: 3.1.1
+info:
+    title: shopez e-commerce API
+    version: 1.0.0
+    description: A REST API for working with the shopez e-commerce platform
+
+paths:
+    /auth/register:
+        post:
+            summary: Register a new user
+            description: Register a new user
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/user'
+            responses:
+                201:
+                    description: Created
+                400:
+                    description: Bad Request
+                409:
+                    description: Conflict
+    /auth/login:
+        post:
+            summary: Login an existing user
+            description: Login an existing user
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/user'
+            responses:
+                200:
+                    description: OK
+                400:
+                    description: Bad Request
+                401:
+                    description: Unauthorised
+    /customers/{customerId}:
+        get:
+            summary: Get customer information
+            description: Get customer information
+            responses:
+                200:
+                    description: OK
+                500:
+                    description: Internal Server Error
+        put:
+            summary: Update customer information
+            description: Update customer information
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/customer'
+            responses:
+                200:
+                    description: OK
+                400:
+                    description: Invalid Argument Provided
+
+components:
+    schemas:
+        customer:
+            type: object
+            properties:
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                email:
+                    type: string
+                phone:
+                    type: string
+            required: [email]
+        product:
+            type: object
+            properties:
+                description:
+                    type: string
+                price:
+                    type: integer
+                    description: Price in cents
+                brand:
+                    type: string
+                model:
+                    type: string
+        order:
+            type: object
+            properties:
+                date:
+                    type: date
+                status:
+                    type: integer
+        user:
+            type: object
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+                    format: password
+            required: [username, password]
