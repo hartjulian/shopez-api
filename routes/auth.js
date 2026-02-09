@@ -11,14 +11,12 @@ router.post('/register', async (req, res) => {
   } else {
     const newUser = await userDb.createNewUser(email, password);
     if (newUser) {
-      res.status(201).send(`User created.`);
+      res.status(201).send('User created.');
     } else {
       res.status(409).send(`User with email ${email} already exists!`);
     };
   }
 });
-
-module.exports = router;
 
 router.post('/login', passport.authenticate('local'), async (req, res) => {
     res.status(200).send('OK');

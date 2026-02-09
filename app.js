@@ -7,6 +7,7 @@ const session = require('express-session');
 const { SESSION_SECRET } = require('./config');
 
 const authRouter = require('./routes/auth');
+const productsRouter = require('./routes/product');
 
 
 app.use(
@@ -24,5 +25,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', authRouter);
+app.use('/products', productsRouter);
 
 module.exports = app;

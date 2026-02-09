@@ -23,8 +23,8 @@ paths:
                     description: Conflict
     /auth/login:
         post:
-            summary: Login an existing user
-            description: Login an existing user
+            summary: Log in an existing user
+            description: Log in an existing user
             requestBody:
                 content:
                     application/json:
@@ -37,6 +37,13 @@ paths:
                     description: Bad Request
                 401:
                     description: Unauthorised
+    /auth/logout:
+        post:
+            summary: Log out a currently logged in user
+            description: Log out a currently logged in user
+            responses:
+                200:
+                    description: OK
     /customers/{customerId}:
         get:
             summary: Get customer information
