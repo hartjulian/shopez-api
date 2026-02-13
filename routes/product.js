@@ -8,6 +8,21 @@ router.get('/', async (req, res) => {
     res.status(200).json(allProducts);
 });
 
+router.post('/', async (req, res) => {
+    const { description, price, brand, model } = req.body;
+    if (description && Number.isInteger(price) && brand && model) {
+        const productArray = [description, price, brand, model];
+        const rowsUpdated = await productDb.insertProduct(productArray);
+        if (rowsUpdated === 1) {
+            res.status(201).send('New product record created');
+        } else {
+            res.status(409).send('An unexpected error occurred and the product record was not created');
+        }
+    } else {
+        res.status(400).send('Bad request');
+    };
+});
+
 router.get('/:productId', async (req, res) => {
     const productId = req.params.productId;
     if (!validator.isInt(productId)) {
@@ -21,25 +36,10 @@ router.get('/:productId', async (req, res) => {
     };
 });
 
-router.post('/', async (req, res) => {
-    const { description, price, brand, model } = req.body;
-    if (description && validator.isCurrency(price) && brand && model) {
-        const productArray = [description, price, brand, model];
-        const rowsUpdated = await productDb.insertProduct(productArray);
-        if (rowsUpdated === 1) {
-            res.status(201).send('New product record created');
-        } else {
-            res.status(409).send('An unexpected error occurred and the product record was not created');
-        }
-    } else {
-        res.status(400).send('Bad request');
-    };
-});
-
 router.put('/:productId', async (req, res) => {
     const { description, price, brand, model } = req.body;
     const productId = req.params.productId;
-    if (validator.isInt(productId) && description && validator.isCurrency(price) && brand && model) {
+    if (validator.isInt(productId) && description && Number.isInteger(price) && brand && model) {
         const productArray = [productId, description, price, brand, model];
         const rowsUpdated = await productDb.updateProduct(productArray);
         if (rowsUpdated === 1) {

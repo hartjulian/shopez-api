@@ -7,8 +7,8 @@ info:
 paths:
     /auth/register:
         post:
-            summary: Register a new user
-            description: Register a new user
+            summary: Registers a new user
+            description: Registers a new user
             requestBody:
                 content:
                     application/json:
@@ -23,8 +23,8 @@ paths:
                     description: Conflict
     /auth/login:
         post:
-            summary: Log in an existing user
-            description: Log in an existing user
+            summary: Logs in an existing user
+            description: Logs in an existing user
             requestBody:
                 content:
                     application/json:
@@ -39,8 +39,8 @@ paths:
                     description: Unauthorised
     /auth/logout:
         post:
-            summary: Log out a currently logged in user
-            description: Log out a currently logged in user
+            summary: Logs out a currently logged in user
+            description: Logs out a currently logged in user
             responses:
                 200:
                     description: OK
@@ -66,7 +66,68 @@ paths:
                     description: OK
                 400:
                     description: Invalid Argument Provided
-
+    /products:
+        get:
+            summary: Gets information of all products
+            description: Gets information of all products
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/product'
+        post:
+            summary: Adds a new product to the system
+            description: Adds a new product to the system
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/product'
+            responses:
+                200:
+                    description: OK
+                400:
+                    description: Bad request
+                409:
+                    description: An unexpected error occurred and the product record was not created
+    /products/{productId}:
+        get:
+            summary: Gets information of a specified product
+            description: Gets information of a specified product
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/product'
+                400:
+                    description: Item not found
+        put:
+            summary: Updates a single product in the system
+            description: Updates a single product in the system
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/product'
+            responses:
+                200:
+                    description: Product record {productId} updated
+                400:
+                    description: Bad request
+                409:
+                    description: An unexpected error occurred and the product record was not updated
+        delete:
+            summary: deletes a single product from the system
+            description: deletes a single product from the system
+            responses:
+                200:
+                    description: Product record {productId} deleted
+                404:
+                    description: Item not found
 components:
     schemas:
         customer:
