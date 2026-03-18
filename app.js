@@ -5,6 +5,7 @@ const passport = require('passport');
 require('./config/passport');
 const session = require('express-session');
 const { SESSION_SECRET } = require('./config');
+const cors = require('cors');
 
 const authRouter = require('./routes/auth');
 const customersRouter = require('./routes/customer');
@@ -19,6 +20,8 @@ app.use(
     resave: false
   })
 );
+
+app.use(cors());
 
 app.use(express.json());
 
