@@ -7,7 +7,7 @@ const getAllProducts = async () => {
 
 const getOneProduct = async (productId) => {
     const result = await db.query('SELECT * FROM products WHERE id = $1', [productId]);
-    return result.rows;
+    return result.rows[0];
 };
 
 const insertProduct = async (product) => {

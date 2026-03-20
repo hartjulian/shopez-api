@@ -17,7 +17,7 @@ const createNewCustomer = async (customer) => {
 
 const getOneCustomer = async (customerId) => {
     const result = await db.query('SELECT * FROM customers WHERE id = $1', [customerId]);
-    return result.rows;
+    return result.rows[0];
 };
 
 const updateCustomer = async (customer) => {

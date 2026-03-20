@@ -29,7 +29,7 @@ router.get('/:customerId', async (req, res) => {
         return res.status(400).send('Bad request');
     }
     const customer = await customerDb.getOneCustomer(customerId);
-    if (customer[0]) {
+    if (customer) {
         res.status(200).json(customer);
     } else {
         res.status(404).send('Item not found');
